@@ -108,7 +108,7 @@ app.get('/comments', async (req, res) => {
 });
 
 // 댓글 삭제 API
-app.delete('/comment/:comment_id', async (req, res) => {
+app.delete('/comments/:comment_id', async (req, res) => {
   const { comment_id } = req.params;
   const { password } = req.body;
   const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
