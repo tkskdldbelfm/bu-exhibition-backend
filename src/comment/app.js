@@ -116,7 +116,3 @@ const port = 3306;
 app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
-
-app.listen(80, function () {
-  console.log('80번 포트로 서비스 하는 웹서버에 CORS 적용')
-})
