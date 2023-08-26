@@ -67,69 +67,45 @@ app.get('/users/:id', cors(corsOptions), function (req, res, next) {
 })
 
 
-// 댓글 작성 API
-app.post('/create-comment', (req, res) => {
-  const { target_id, nickname, password, comment } = req.body;
-  const insertQuery = 'INSERT INTO comments (target_id, nickname, password, comment) VALUES (?, ?, ?, ?)';
-  connection.query(insertQuery, [target_id, nickname, password, comment], (err, result) => {
-    if (err) {
-      console.error('Error creating comment:', err);
-      res.status(500).json({ message: 'Internal Server Error' });
-    } else {
-      const newCommentId = result.insertId; // 삽입된 comment_id 값
-      res.json({ message: '댓글이 작성되었습니다.', comment_id: newCommentId });
-    }
-  });
-});
+// 댓글 목록 가져오기
+async function loadComments() {
+  const response = await fetch('/comments');
+  const comments = await response.json();
 
+  // 댓글 목록 표시
+  commentsList.innerHTML = '';
+  comments.forEach(comment => {
+    const li = document.createElement('li');
+    li.textContent = comment.comment;
 
-// 댓글 조회 API
-app.get('/get-comments', (req, res) => {
-  const target_id = req.query.id;
-  const selectQuery = 'SELECT * FROM comments WHERE target_id = ?';
-  connection.query(selectQuery, [target_id], (err, results) => {
-    if (err) {
-      console.error('Error fetching comments:', err);
-      res.status(500).json({ message: 'Internal Server Error' });
-    } else {
-      res.json(results);
-    }
-  });
-});
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = '삭제';
+    deleteButton.addEventListener('click', async () => {
+      const deletePassword = prompt('비밀번호를 입력하세요.');
+      if (deletePassword) {
+        const deleteResponse = await fetch(`/comments/${comment.comment_id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ password: deletePassword })
+        });
 
-// 댓글 삭제 API
-app.post('/delete-comment', (req, res) => {
-  const { comment_id, password } = req.body;
-  const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
-  connection.query(selectQuery, [comment_id], (selectErr, selectResults) => {
-    if (selectErr) {
-      console.error('Error selecting comment:', selectErr);
-      res.status(500).json({ message: 'Internal Server Error' });
-      return;
-    }
-
-    if (selectResults.length === 0) {
-      res.status(404).json({ message: 'Comment not found' });
-      return;
-    }
-
-    const comment = selectResults[0];
-    if (comment.password !== password) {
-      res.status(401).json({ message: '비밀번호가 일치하지 않습니다.' });
-      return;
-    }
-
-    const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
-    connection.query(deleteQuery, [comment_id], (deleteErr) => {
-      if (deleteErr) {
-        console.error('Error deleting comment:', deleteErr);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        if (deleteResponse.ok) {
+          // 댓글 삭제 성공 시 화면 갱신
+          loadComments();
+        } else {
+          // 댓글 삭제 실패 시 처리
+          console.error('댓글 삭제 실패');
+        }
       }
-      res.json({ message: '댓글이 삭제되었습니다.' });
     });
+
+    li.appendChild(deleteButton);
+    commentsList.appendChild(li);
   });
-});
+}
+
 
 
 // 서버 시작
