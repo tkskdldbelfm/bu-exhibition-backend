@@ -66,46 +66,83 @@ app.get('/users/:id', cors(corsOptions), function (req, res, next) {
   res.json({ msg: 'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app 규칙인 Origin에 대하여 개방' })
 })
 
+// 댓글 작성 API
+app.post('/comments', async (req, res) => {
+  const { target_id, nickname, password, comment } = req.body;
+  const insertQuery = 'INSERT INTO comments (target_id, nickname, password, comment) VALUES (?, ?, ?, ?)';
 
-// 댓글 목록 가져오기
-async function loadComments() {
-  const response = await fetch('/comments');
-  const comments = await response.json();
-
-  // 댓글 목록 표시
-  commentsList.innerHTML = '';
-  comments.forEach(comment => {
-    const li = document.createElement('li');
-    li.textContent = comment.comment;
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = '삭제';
-    deleteButton.addEventListener('click', async () => {
-      const deletePassword = prompt('비밀번호를 입력하세요.');
-      if (deletePassword) {
-        const deleteResponse = await fetch(`/comments/${comment.comment_id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ password: deletePassword })
-        });
-
-        if (deleteResponse.ok) {
-          // 댓글 삭제 성공 시 화면 갱신
-          loadComments();
-        } else {
-          // 댓글 삭제 실패 시 처리
-          console.error('댓글 삭제 실패');
-        }
+  try {
+    await connection.query(insertQuery, [target_id, nickname, password, comment], (err, result) => {
+      if (err) {
+        throw new Error('Error creating comment:', err)
+      } else {
+        const newCommentId = result.insertId; // 삽입된 comment_id 값
+        res.json({ message: '댓글이 작성되었습니다.', comment_id: newCommentId, target_id, nickname, comment });
       }
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
-    li.appendChild(deleteButton);
-    commentsList.appendChild(li);
-  });
-}
 
+
+
+//전체 댓글 조회
+app.get('/comments', async (req, res) => {
+  const selectQuery = 'SELECT * FROM comments';
+
+  try {
+    await connection.query(selectQuery, (err, results) => {
+      if (err) {
+        throw new Error('Internal Server Error');
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// 댓글 삭제 API
+app.delete('/comment/:comment_id', async (req, res) => {
+  const { comment_id } = req.params;
+  const { password } = req.body;
+  const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
+  const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
+
+  try {
+    await connection.query(selectQuery, [comment_id], async (selectErr, selectResults) => {
+      if (selectErr) {
+        throw new Error('Internal Server Error');
+      }
+
+      if (selectResults.length === 0) {
+        res.status(404).json({ message: 'Comment not found' });
+        return;
+      }
+
+      const comment = selectResults[0];
+
+      if (comment.password !== password) {
+        res.status(400).json({ message: '비밀번호가 일치하지 않습니다.' });
+        return;
+      }
+
+      await connection.query(deleteQuery, [comment_id], (deleteErr) => {
+        if (deleteErr) {
+          throw new Error('Internal Server Error');
+        }
+        res.json({ message: '댓글이 삭제되었습니다.' });
+      });
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 // 서버 시작
