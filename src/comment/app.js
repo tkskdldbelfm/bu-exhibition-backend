@@ -70,9 +70,7 @@ app.get('/comments/:target_id', async (req, res) => {
 });
 
 // 서버 시작
-const port = 3306;
+const port = 3000;
 app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
-
-app.use(cors());
