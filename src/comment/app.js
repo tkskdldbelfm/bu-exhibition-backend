@@ -48,7 +48,7 @@ connection.connect((err) => {
 
 // /users 경로로 GET 요청 처리
 app.get('/users', (req, res) => {
-  const sql = 'SELECT * FROM users'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
+  const sql = 'SELECT target_id, nickname, updated, comment FROM users;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
 
   connection.query(sql, (err, results) => {
     if (err) {
