@@ -103,6 +103,44 @@ app.get('/comments', (req, res) => {
 });
 
 
+// 댓글 삭제 요청 처리
+app.post('/delete-comment', (req, res) => {
+  const comment_id = req.body.comment_id;
+  const password = req.body.password;
+
+  // comment_id와 password를 사용하여 해당 댓글을 가져온 후 비교
+  const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
+  connection.query(selectQuery, [comment_id], (selectError, selectResults) => {
+    if (selectError) {
+      console.error('Error selecting comment:', selectError);
+      res.status(500).json({ message: 'Internal Server Error' });
+      return;
+    }
+
+    if (selectResults.length === 0) {
+      res.status(404).json({ message: 'Comment not found' });
+      return;
+    }
+
+    const comment = selectResults[0];
+    if (comment.password !== password) {
+      res.status(401).json({ message: '비밀번호가 일치하지 않습니다.' });
+      return;
+    }
+
+    // 비밀번호가 일치하면 댓글 삭제
+    const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
+    connection.query(deleteQuery, [comment_id], (deleteError) => {
+      if (deleteError) {
+        console.error('Error deleting comment:', deleteError);
+        res.status(500).json({ message: 'Internal Server Error' });
+        return;
+      }
+      res.json({ message: '댓글이 삭제되었습니다.' });
+    });
+  });
+});
+
 
 // 서버 시작
 const port = 30382;
