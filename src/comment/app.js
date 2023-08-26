@@ -16,7 +16,7 @@ const dbConfig = {
 };
 
 const origins = [
-  'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app/comment/comment.html'
+  'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app'
 ];
 
 const corsOptions = {
@@ -70,7 +70,7 @@ app.get('/comments/:target_id', async (req, res) => {
 });
 
 // 서버 시작
-const port = 3000;
+const port = 5000;
 app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
