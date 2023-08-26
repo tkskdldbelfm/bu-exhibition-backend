@@ -67,52 +67,43 @@ app.get('/users/:id', cors(corsOptions), function (req, res, next) {
 })
 
 
-
-// /comments 경로로 POST 요청 처리
-app.post('/comments', (req, res) => {
+// 댓글 작성 API
+app.post('/create-comment', (req, res) => {
   const { target_id, nickname, password, comment } = req.body;
-
-  const sql = `
-    INSERT INTO comments (target_id, nickname, password, comment)
-    VALUES (?, ?, ?, ?)
-  `;
-
-  connection.query(sql, [target_id, nickname, password, comment], (err, results) => {
+  const insertQuery = 'INSERT INTO comments (target_id, nickname, password, comment) VALUES (?, ?, ?, ?)';
+  connection.query(insertQuery, [target_id, nickname, password, comment], (err, result) => {
     if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
+      console.error('Error creating comment:', err);
+      res.status(500).json({ message: 'Internal Server Error' });
+    } else {
+      const newCommentId = result.insertId; // 삽입된 comment_id 값
+      res.json({ message: '댓글이 작성되었습니다.', comment_id: newCommentId });
     }
-    res.json({ message: '댓글이 생성되었습니다.' });
   });
 });
 
 
-// /comments 경로로 GET 요청 처리
-app.get('/comments', (req, res) => {
-  const sql = 'SELECT * FROM comments'; // comments 테이블의 모든 열을 선택하는 SQL 쿼리
-
-  connection.query(sql, (err, results) => {
+// 댓글 조회 API
+app.get('/get-comments', (req, res) => {
+  const target_id = req.query.id;
+  const selectQuery = 'SELECT * FROM comments WHERE target_id = ?';
+  connection.query(selectQuery, [target_id], (err, results) => {
     if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
+      console.error('Error fetching comments:', err);
+      res.status(500).json({ message: 'Internal Server Error' });
+    } else {
+      res.json(results);
     }
-    res.json(results); // 결과를 JSON 형태로 응답
   });
 });
 
-
-// 댓글 삭제 요청 처리
+// 댓글 삭제 API
 app.post('/delete-comment', (req, res) => {
-  const comment_id = req.body.comment_id;
-  const password = req.body.password;
-
-  // comment_id와 password를 사용하여 해당 댓글을 가져온 후 비교
+  const { comment_id, password } = req.body;
   const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
-  connection.query(selectQuery, [comment_id], (selectError, selectResults) => {
-    if (selectError) {
-      console.error('Error selecting comment:', selectError);
+  connection.query(selectQuery, [comment_id], (selectErr, selectResults) => {
+    if (selectErr) {
+      console.error('Error selecting comment:', selectErr);
       res.status(500).json({ message: 'Internal Server Error' });
       return;
     }
@@ -128,11 +119,10 @@ app.post('/delete-comment', (req, res) => {
       return;
     }
 
-    // 비밀번호가 일치하면 댓글 삭제
     const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
-    connection.query(deleteQuery, [comment_id], (deleteError) => {
-      if (deleteError) {
-        console.error('Error deleting comment:', deleteError);
+    connection.query(deleteQuery, [comment_id], (deleteErr) => {
+      if (deleteErr) {
+        console.error('Error deleting comment:', deleteErr);
         res.status(500).json({ message: 'Internal Server Error' });
         return;
       }
