@@ -7,12 +7,24 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 const dbConfig = {
   host: 'exhibitiondb',
   user: 'gwang',
   password: 'Dlrhkddnjs1!',
   database: 'exhibitiondata'
 };
+
+const origins = [
+  'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app/comment/comment.html'
+];
+
+const corsOptions = {
+  origin: origins,
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // MariaDB 연결
 const pool = mysql.createPool(dbConfig);
