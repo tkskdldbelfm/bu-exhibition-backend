@@ -66,69 +66,41 @@ app.get('/users/:id', cors(corsOptions), function (req, res, next) {
   res.json({ msg: 'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app 규칙인 Origin에 대하여 개방' })
 })
 
-// 댓글 생성 API
-app.post('/comments', async (req, res) => {
-  try {
-    const { target_id, nickname, password, comment } = req.body;
-    const created_at = new Date();
 
-    const query = `
-      INSERT INTO comments (target_id, nickname, password, comment, created_at)
-      VALUES (?, ?, ?, ?, ?)
-    `;
 
-    connection.query(query, [target_id, nickname, password, comment, created_at], (err) => {
-      if (err) {
-        console.error('댓글 생성 오류:', err);
-        res.status(500).json({ message: '댓글 생성에 실패했습니다.' });
-      } else {
-        res.json({ message: '댓글이 생성되었습니다.' });
-      }
-    });
-  } catch (error) {
-    console.error('댓글 생성 오류:', error);
-    res.status(500).json({ message: '댓글 생성에 실패했습니다.' });
-  }
+// /comments 경로로 POST 요청 처리
+app.post('/comments', (req, res) => {
+  const { target_id, nickname, password, comment } = req.body;
+
+  const sql = `
+    INSERT INTO comments (target_id, nickname, password, comment)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  connection.query(sql, [target_id, nickname, password, comment], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json({ message: '댓글이 생성되었습니다.' });
+  });
 });
 
-// 댓글 조회 API
-app.get('/comments/:target_id', async (req, res) => {
-  try {
-    const target_id = req.params.target_id;
 
-    const query = 'SELECT * FROM comments WHERE target_id = ?';
-
-    connection.query(query, [target_id], (err, rows) => {
-      if (err) {
-        console.error('댓글 조회 오류:', err);
-        res.status(500).json({ message: '댓글 조회에 실패했습니다.' });
-      } else {
-        res.json(rows);
-      }
-    });
-  } catch (error) {
-    console.error('댓글 조회 오류:', error);
-    res.status(500).json({ message: '댓글 조회에 실패했습니다.' });
-  }
-});
-
-// /users 경로로 GET 요청 처리
-app.get('/users', async (req, res) => {
-  const sql = 'SELECT * FROM users'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
+// /comments 경로로 GET 요청 처리
+app.get('/comments', (req, res) => {
+  const sql = 'SELECT * FROM comments'; // comments 테이블의 모든 열을 선택하는 SQL 쿼리
 
   connection.query(sql, (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results);
+      return;
     }
+    res.json(results); // 결과를 JSON 형태로 응답
   });
 });
-
-
-
-
 
 
 
