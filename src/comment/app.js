@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 
 const dbConfig = {
-  host: 'exhibitiondb',
+  host: 'svc.sel3.cloudtype.app',
   user: 'gwang',
   password: 'Dlrhkddnjs1!',
   database: 'exhibitiondata'
