@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 const dbConfig = {
   host: 'svc.sel3.cloudtype.app',
-  port: '30382',
+  port: '3306',
   user: 'gwang',
   password: 'Dlrhkddnjs1!',
   database: 'exhibitiondata'
