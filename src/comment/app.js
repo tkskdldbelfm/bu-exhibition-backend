@@ -1,22 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql2/promise'); // mysql2 사용
+const mysql = require('mysql'); // mysql 사용
 const cors = require('cors');
-const MariaDB = require('mariadb')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
+
 const dbConfig = {
   host: 'svc.sel3.cloudtype.app',
-  port: '3306',
+  port: '30382',
   user: 'gwang',
   password: 'Dlrhkddnjs1!',
   database: 'exhibitiondata'
 };
-console.log(dbConfig);
 
 const origins = [
   'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app'
@@ -30,25 +29,28 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// MariaDB 연결
+const pool = mysql.createPool(dbConfig);
+
+
+const connection = mysql.createConnection(dbConfig);
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Database connection error:', err);
+    return;
+  }
+  console.log('Connected to the database');
+
+  // 여기서 쿼리 실행 등의 작업 수행
+});
+
 
 app.get('/users/:id', cors(corsOptions), function (req, res, next) {
   res.json({ msg: 'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app 규칙인 Origin에 대하여 개방' })
 })
 
 
-
-// MariaDB 연결
-const pool = mysql.createPool(dbConfig);
-
-
-pool.getConnection()
-  .then(connection => {
-    console.log('Connected to the database');
-    // 이후 쿼리 실행 등의 작업 수행
-  })
-  .catch(error => {
-    console.error('Database connection error:', error);
-  });
 
 
 // 댓글 생성 API
@@ -114,7 +116,7 @@ app.get('/users', async (req, res) => {
 
 
 // 서버 시작
-const port = 3306;
+const port = 30382;
 app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
