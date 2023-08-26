@@ -73,17 +73,16 @@ app.get('/comments/:target_id', async (req, res) => {
 });
 
 // /users 경로로 GET 요청 처리
-app.get('/users', (req, res) => {
+app.get('/users', async (req, res) => {
   const sql = 'SELECT * FROM users'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
 
-  connection.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
-    }
-    res.json(results); // 결과를 JSON 형태로 응답
-  });
+  try {
+    const [results] = await pool.query(sql);
+    res.json(results);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 
