@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 
 const dbConfig = {
   host: 'svc.sel3.cloudtype.app',
+  port: '30382',
   user: 'gwang',
   password: 'Dlrhkddnjs1!',
   database: 'exhibitiondata'
@@ -22,9 +23,16 @@ const origins = [
 const corsOptions = {
   origin: origins,
   credentials: true,
+  optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
+
+
+app.get('/users/:id', cors(corsOptions), function (req, res, next) {
+  res.json({ msg: 'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app 규칙인 Origin에 대하여 개방' })
+})
+
 
 
 // MariaDB 연결
@@ -108,3 +116,7 @@ const port = 3306;
 app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
+
+app.listen(80, function () {
+  console.log('80번 포트로 서비스 하는 웹서버에 CORS 적용')
+})
