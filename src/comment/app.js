@@ -115,34 +115,30 @@ app.delete('/comments/:comment_id', async (req, res) => {
   const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
 
   try {
-    await connection.query(selectQuery, [comment_id], async (selectErr, selectResults) => {
-      if (selectErr) {
-        throw new Error('Internal Server Error');
-      }
+    const [selectResults] = await connection.query(selectQuery, [comment_id]);
 
-      if (selectResults.length === 0) {
-        res.status(404).json({ message: 'Comment not found' });
-        return;
-      }
+    if (selectResults.length === 0) {
+      res.status(404).json({ message: 'Comment not found' });
+      return;
+    }
 
-      const comment = selectResults[0];
+    const comment = selectResults[0];
 
-      if (comment.password !== password) {
-        res.status(400).json({ message: '비밀번호가 일치하지 않습니다.' });
-        return;
-      }
+    if (comment.password !== password) {
+      res.status(400).json({ message: '비밀번호가 일치하지 않습니다.' });
+      return;
+    }
 
-      await connection.query(deleteQuery, [comment_id], (deleteErr) => {
-        if (deleteErr) {
-          throw new Error('Internal Server Error');
-        }
-        res.json({ message: '댓글이 삭제되었습니다.' });
-      });
-    });
+    await connection.query(deleteQuery, [comment_id]);
+
+    res.json({ message: '댓글이 삭제되었습니다.' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+
 
 
 // 서버 시작
