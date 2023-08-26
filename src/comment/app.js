@@ -26,10 +26,19 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+
 // MariaDB 연결
 const pool = mysql.createPool(dbConfig);
 
 
+pool.getConnection()
+  .then(connection => {
+    console.log('Connected to the database');
+    // 이후 쿼리 실행 등의 작업 수행
+  })
+  .catch(error => {
+    console.error('Database connection error:', error);
+  });
 
 
 // 댓글 생성 API
@@ -72,12 +81,18 @@ app.get('/comments/:target_id', async (req, res) => {
   }
 });
 
+
+
+
 // /users 경로로 GET 요청 처리
 app.get('/users', async (req, res) => {
-  const sql = 'SELECT * FROM users'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
-
   try {
-    const [results] = await pool.query(sql);
+    const connection = await pool.getConnection();
+    const sql = 'SELECT * FROM users'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
+
+    const [results] = await connection.query(sql);
+    connection.release();
+
     res.json(results);
   } catch (err) {
     console.error('Error executing query:', err);
