@@ -27,7 +27,7 @@ jobs:
               env:
                 - name: NODE_ENV
                   value: production
-              ports: "3306"
+              ports: "5000"
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
