@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise'); // mysql2 사용
 const cors = require('cors');
+const MariaDB = require('mariadb')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +16,7 @@ const dbConfig = {
   password: 'Dlrhkddnjs1!',
   database: 'exhibitiondata'
 };
+console.log(dbConfig);
 
 const origins = [
   'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app'
