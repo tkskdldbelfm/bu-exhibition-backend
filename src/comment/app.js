@@ -114,9 +114,9 @@ app.delete('/comments/:comment_id', async (req, res) => {
   const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
   const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
 
-  console.log(comment_id, password)
-  console.log(comment_id)
-  console.log(password)
+  console.log(comment_id, password);
+  console.log(comment_id);
+  console.log(password);
 
   try {
     const [selectResults] = await connection.query(selectQuery, [comment_id]);
