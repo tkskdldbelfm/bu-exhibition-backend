@@ -120,7 +120,7 @@ app.delete('/comments/:comment_id', async (req, res) => {
 
   try {
     const [selectResults] = await connection.query(selectQuery, [comment_id]);
-
+    console.log('selectResults:', selectResults);
     if (selectResults.length === 0) {
       res.status(404).json({ message: 'Comment not found' });
       return;
