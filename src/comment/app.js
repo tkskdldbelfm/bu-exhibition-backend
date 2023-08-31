@@ -18,7 +18,8 @@ const dbConfig = {
 };
 
 const origins = [
-  'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app'
+  'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app',
+  'http://127.0.0.1:5500'
 ];
 
 const corsOptions = {
