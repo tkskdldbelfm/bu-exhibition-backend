@@ -49,7 +49,7 @@ connection.connect((err) => {
 
 // /users 경로로 GET 요청 처리
 app.get('/users', (req, res) => {
-  const sql = 'SELECT target_id, nickname, updated, comment FROM users;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
+  const sql = 'SELECT id, username, profileimg, profile_intro, user_phone, user_email, team, ctag, job FROM users;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
 
   connection.query(sql, (err, results) => {
     if (err) {
@@ -63,11 +63,56 @@ app.get('/users', (req, res) => {
 });
 
 
-app.get('/users/:id', cors(corsOptions), function (req, res, next) {
-  res.json({ msg: 'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app 규칙인 Origin에 대하여 개방' })
-})
+// /users/:id 경로로 GET 요청 처리
+app.get('/users/:id', (req, res) => {
+  const userId = req.params.id;
 
-// /users 경로로 GET 요청 처리
+  const userSql = 'SELECT id, username, profileimg, profile_intro, user_phone, user_email, team, ctag, job FROM users WHERE id = ?';
+  const worksSql = 'SELECT * FROM works WHERE work_id = ?';
+  const commentsSql = 'SELECT * FROM comments WHERE target_id = ?';
+
+  // 1. users 테이블의 id값이 같은 레코드 불러오기
+  connection.query(userSql, [userId], (err, userResults) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    // 2. users 테이블의 id값과 works 테이블의 work_id가 같은 레코드 모두 불러오기
+    connection.query(worksSql, [userId], (err, worksResults) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+
+      // 3. users 테이블의 id값과 comments 테이블의 target_id가 같은 레코드 모두 불러오기
+      connection.query(commentsSql, [userId], (err, commentsResults) => {
+        if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
+
+        const userData = userResults[0];
+        const worksData = worksResults;
+        const commentsData = commentsResults;
+
+        const combinedData = {
+          user: userData,
+          works: worksData,
+          comments: commentsData
+        };
+
+        res.json(combinedData); // 결과를 JSON 형태로 응답
+      });
+    });
+  });
+});
+
+
+// /works 경로로 GET 요청 처리
 app.get('/works', (req, res) => {
   const sql = 'SELECT work_id, work_order, workthumb, workname, workintro, workimg, workbody, weblink, prototypelink, link FROM works;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
 
@@ -85,7 +130,7 @@ app.get('/works', (req, res) => {
 
 app.get('/works/:work_id', cors(corsOptions), function (req, res, next) {
   res.json({ msg: 'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app 규칙인 Origin에 대하여 개방' })
-})
+});
 
 
 
