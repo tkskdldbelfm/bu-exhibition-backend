@@ -108,21 +108,24 @@ app.get('/comments', async (req, res) => {
 });
 
 // 댓글 삭제 API
-app.delete('/comments/:comment_id', async (req, res) => {
+app.delete('/comments/:comment_id', cors(corsOptions), async (req, res) => {
   const { comment_id } = req.params;
   const { password } = req.body;
   const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
   const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
 
-  console.log(comment_id, password);
-  console.log(comment_id);
-  console.log(password);
 
   try {
-    const selectResults = await connection.query(selectQuery, [comment_id]);
-    console.log('selectResults:', selectResults);
+    const selectResults = await new Promise((resolve, reject) => {
+      connection.query(selectQuery, [comment_id], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
 
-    // selectResults는 객체이므로 객체 속성을 직접 참조하여 사용
     if (selectResults.length === 0) {
       res.status(404).json({ message: 'Comment not found' });
       return;
@@ -135,7 +138,15 @@ app.delete('/comments/:comment_id', async (req, res) => {
       return;
     }
 
-    await connection.query(deleteQuery, [comment_id]);
+    await new Promise((resolve, reject) => {
+      connection.query(deleteQuery, [comment_id], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
 
     res.json({ message: '댓글이 삭제되었습니다.' });
   } catch (error) {
