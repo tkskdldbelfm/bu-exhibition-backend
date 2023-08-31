@@ -119,8 +119,10 @@ app.delete('/comments/:comment_id', async (req, res) => {
   console.log(password);
 
   try {
-    const [selectResults] = await connection.query(selectQuery, [comment_id]);
+    const selectResults = await connection.query(selectQuery, [comment_id]);
     console.log('selectResults:', selectResults);
+
+    // selectResults는 객체이므로 객체 속성을 직접 참조하여 사용
     if (selectResults.length === 0) {
       res.status(404).json({ message: 'Comment not found' });
       return;
