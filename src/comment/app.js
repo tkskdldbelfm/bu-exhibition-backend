@@ -64,57 +64,40 @@ app.get('/users', (req, res) => {
 
 
 // /users/:id 경로로 GET 요청 처리
-app.get('/users/:id', (req, res) => {
-  const userId = req.params.id;
+app.get('/users/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const userSql = 'SELECT id, username, profileimg, profile_intro, user_phone, user_email, team, ctag, job, mainProject, subProject, award_1, award_2, award_3, award_4, award_5 FROM users WHERE id = ?';
+    const worksSql = 'SELECT * FROM works WHERE work_id = ?';
+    const commentsSql = 'SELECT * FROM comments WHERE target_id = ?';
 
-  const userSql = 'SELECT id, username, profileimg, profile_intro, user_phone, user_email, team, ctag, job FROM users WHERE id = ?';
-  const worksSql = 'SELECT * FROM works WHERE work_id = ?';
-  const commentsSql = 'SELECT * FROM comments WHERE target_id = ?';
+    const [userResults, worksResults, commentsResults] = await Promise.all([
+      query(userSql, [userId]),
+      query(worksSql, [userId]),
+      query(commentsSql, [userId]),
+    ]);
 
-  // 1. users 테이블의 id값이 같은 레코드 불러오기
-  connection.query(userSql, [userId], (err, userResults) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
-    }
+    const userData = userResults[0];
+    const worksData = worksResults;
+    const commentsData = commentsResults;
 
-    // 2. users 테이블의 id값과 works 테이블의 work_id가 같은 레코드 모두 불러오기
-    connection.query(worksSql, [userId], (err, worksResults) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-        return;
-      }
+    const combinedData = {
+      user: userData,
+      works: worksData,
+      comments: commentsData
+    };
 
-      // 3. users 테이블의 id값과 comments 테이블의 target_id가 같은 레코드 모두 불러오기
-      connection.query(commentsSql, [userId], (err, commentsResults) => {
-        if (err) {
-          console.error('Error executing query:', err);
-          res.status(500).json({ error: 'Internal Server Error' });
-          return;
-        }
-
-        const userData = userResults[0];
-        const worksData = worksResults;
-        const commentsData = commentsResults;
-
-        const combinedData = {
-          user: userData,
-          works: worksData,
-          comments: commentsData
-        };
-
-        res.json(combinedData); // 결과를 JSON 형태로 응답
-      });
-    });
-  });
+    res.json(combinedData); // 결과를 JSON 형태로 응답
+  } catch (error) {
+    console.error('Error handling request:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 
 // /works 경로로 GET 요청 처리
 app.get('/works', (req, res) => {
-  const sql = 'SELECT work_id, work_order, workthumb, workname, workintro, workimg, workbody, weblink, prototypelink, link FROM works;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
+  const sql = 'SELECT work_id, work_order, workthumb, workname, workintro, workimg, workbody, weblink, prototypelink, link, usetool_1, usetool_2, usetool_3, usetool_4, usetool_5 FROM works;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
 
   connection.query(sql, (err, results) => {
     if (err) {
@@ -155,12 +138,9 @@ app.post('/comments', async (req, res) => {
   }
 });
 
-
-
-
-//전체 댓글 조회
-app.get('/comments', async (req, res) => {
-  const selectQuery = 'SELECT * FROM comments';
+//target 댓글 조회
+app.get('/comments/:target_id', async (req, res) => {
+  const selectQuery = 'SELECT * FROM comments WHERE target_id = ?';
 
   try {
     await connection.query(selectQuery, (err, results) => {
@@ -210,6 +190,96 @@ app.delete('/comments/:comment_id', cors(corsOptions), async (req, res) => {
 
     await new Promise((resolve, reject) => {
       connection.query(deleteQuery, [comment_id], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    res.json({ message: '댓글이 삭제되었습니다.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+// 댓글 작성 API
+app.post('/guestbooks', async (req, res) => {
+  const { guestname, password, guestbook } = req.body;
+  const insertQuery = 'INSERT INTO comments (guestname, password, guestbook) VALUES (?, ?, ?, ?)';
+
+  try {
+    await connection.query(insertQuery, [guestname, password, guestbook], (err, result) => {
+      if (err) {
+        throw new Error('Error creating comment:', err)
+      } else {
+        const newGuestbookId = result.insertId; // 삽입된 comment_id 값
+        res.json({ message: '댓글이 작성되었습니다.', guestbook_id: newGuestbookId, guestname, guestbook });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+//방명록 조회
+app.get('/guestbooks', async (req, res) => {
+  const selectQuery = 'SELECT * FROM guestbooks';
+
+  try {
+    await connection.query(selectQuery, (err, results) => {
+      if (err) {
+        throw new Error('Internal Server Error');
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// 방명록 삭제 API
+app.delete('/gusetbooks/:guestbook_id', cors(corsOptions), async (req, res) => {
+  const { guestbook_id } = req.params;
+  const { password } = req.body;
+  const selectQuery = 'SELECT * FROM guestbooks WHERE guestbook_id = ?';
+  const deleteQuery = 'DELETE FROM guestbooks WHERE guestbook_id = ?';
+
+
+
+  try {
+    const selectResults = await new Promise((resolve, reject) => {
+      connection.query(selectQuery, [guestbook_id], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    if (selectResults.length === 0) {
+      res.status(404).json({ message: 'Comment not found' });
+      return;
+    }
+
+    const guestbook = selectResults[0];
+
+    if (guestbook.password !== password) {
+      res.status(400).json({ message: '비밀번호가 일치하지 않습니다.' });
+      return;
+    }
+
+    await new Promise((resolve, reject) => {
+      connection.query(deleteQuery, [guestbook_id], (err) => {
         if (err) {
           reject(err);
         } else {
