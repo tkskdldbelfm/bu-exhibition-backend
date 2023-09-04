@@ -67,10 +67,11 @@ app.get('/users', (req, res) => {
 app.get('/users/:id', async (req, res) => {
   try {
     const userId = req.params.id;
-    const userSql = 'SELECT id, username, profileimg, profile_intro, user_phone, user_email, team, ctag, job, mainProject, subProject, award_1, award_2, award_3, award_4, award_5 FROM users WHERE id = ?';
-    const worksSql = 'SELECT * FROM works WHERE work_id = ?';
-    const commentsSql = 'SELECT * FROM comments WHERE target_id = ?';
+    const userSql = 'SELECT * FROM users WHERE id = ?';
+    const worksSql = 'SELECT * FROM works WHERE user_id = ?'; // 변경된 SQL
+    const commentsSql = 'SELECT * FROM comments WHERE user_id = ?'; // 변경된 SQL
 
+    // 데이터베이스 쿼리 실행 (query 함수는 여기에서 정의되어야 함)
     const [userResults, worksResults, commentsResults] = await Promise.all([
       query(userSql, [userId]),
       query(worksSql, [userId]),
@@ -84,7 +85,7 @@ app.get('/users/:id', async (req, res) => {
     const combinedData = {
       user: userData,
       works: worksData,
-      comments: commentsData
+      comments: commentsData,
     };
 
     res.json(combinedData); // 결과를 JSON 형태로 응답
@@ -119,7 +120,7 @@ app.get('/works/:work_id', cors(corsOptions), function (req, res, next) {
 
 
 // 댓글 작성 API
-app.post('/comments', async (req, res) => {
+app.post('/comments', cors(corsOptions), async (req, res) => {
   const { target_id, nickname, password, comment } = req.body;
   const insertQuery = 'INSERT INTO comments (target_id, nickname, password, comment) VALUES (?, ?, ?, ?)';
 
@@ -139,7 +140,7 @@ app.post('/comments', async (req, res) => {
 });
 
 //target 댓글 조회
-app.get('/comments/:target_id', async (req, res) => {
+app.get('/comments/target/:target_id', cors(corsOptions), async (req, res) => {
   const selectQuery = 'SELECT * FROM comments WHERE target_id = ?';
 
   try {
@@ -162,7 +163,6 @@ app.delete('/comments/:comment_id', cors(corsOptions), async (req, res) => {
   const { password } = req.body;
   const selectQuery = 'SELECT * FROM comments WHERE comment_id = ?';
   const deleteQuery = 'DELETE FROM comments WHERE comment_id = ?';
-
 
 
   try {
@@ -207,10 +207,10 @@ app.delete('/comments/:comment_id', cors(corsOptions), async (req, res) => {
 
 
 
-// 댓글 작성 API
-app.post('/guestbooks', async (req, res) => {
+// 방명록 작성 API
+app.post('/guestbooks', cors(corsOptions), async (req, res) => {
   const { guestname, password, guestbook } = req.body;
-  const insertQuery = 'INSERT INTO comments (guestname, password, guestbook) VALUES (?, ?, ?, ?)';
+  const insertQuery = 'INSERT INTO comments (guestname, password, guestbook) VALUES (?, ?, ?)';
 
   try {
     await connection.query(insertQuery, [guestname, password, guestbook], (err, result) => {
@@ -247,7 +247,7 @@ app.get('/guestbooks', async (req, res) => {
 });
 
 // 방명록 삭제 API
-app.delete('/gusetbooks/:guestbook_id', cors(corsOptions), async (req, res) => {
+app.delete('/guestbooks/:guestbook_id', cors(corsOptions), async (req, res) => {
   const { guestbook_id } = req.params;
   const { password } = req.body;
   const selectQuery = 'SELECT * FROM guestbooks WHERE guestbook_id = ?';
