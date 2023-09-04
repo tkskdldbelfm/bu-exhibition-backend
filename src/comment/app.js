@@ -49,7 +49,7 @@ connection.connect((err) => {
 
 // /users 경로로 GET 요청 처리
 app.get('/users', (req, res) => {
-  const sql = 'SELECT id, username, profileimg, profile_intro, user_phone, user_email, team, ctag, job FROM users;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
+  const sql = 'SELECT * FROM users;'; // users 테이블의 모든 열을 선택하는 SQL 쿼리
 
   connection.query(sql, (err, results) => {
     if (err) {
@@ -139,21 +139,27 @@ app.post('/comments', cors(corsOptions), async (req, res) => {
   }
 });
 
-//target 댓글 조회
+
+// target 댓글 조회
 app.get('/comments/target/:target_id', cors(corsOptions), async (req, res) => {
+  const targetId = req.params.target_id;
   const selectQuery = 'SELECT * FROM comments WHERE target_id = ?';
 
   try {
-    await connection.query(selectQuery, (err, results) => {
-      if (err) {
-        throw new Error('Internal Server Error');
-      } else {
-        res.status(200).json(results);
-      }
+    const results = await new Promise((resolve, reject) => {
+      connection.query(selectQuery, [targetId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
     });
+
+    res.status(200).json(results);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
@@ -206,7 +212,6 @@ app.delete('/comments/:comment_id', cors(corsOptions), async (req, res) => {
 });
 
 
-
 // 방명록 작성 API
 app.post('/guestbooks', cors(corsOptions), async (req, res) => {
   const { guestname, password, guestbook } = req.body;
@@ -246,13 +251,13 @@ app.get('/guestbooks', async (req, res) => {
   }
 });
 
+
 // 방명록 삭제 API
 app.delete('/guestbooks/:guestbook_id', cors(corsOptions), async (req, res) => {
   const { guestbook_id } = req.params;
   const { password } = req.body;
   const selectQuery = 'SELECT * FROM guestbooks WHERE guestbook_id = ?';
   const deleteQuery = 'DELETE FROM guestbooks WHERE guestbook_id = ?';
-
 
 
   try {
@@ -294,6 +299,12 @@ app.delete('/guestbooks/:guestbook_id', cors(corsOptions), async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+
+
+
+
+
 
 
 
