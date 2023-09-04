@@ -95,6 +95,19 @@ app.get('/users/:id', async (req, res) => {
   }
 });
 
+// query 함수 정의
+function query(sql, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(sql, values, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 
 
 // /works 경로로 GET 요청 처리
