@@ -68,8 +68,8 @@ app.get('/users/:id', async (req, res) => {
   try {
     const userId = req.params.id;
     const userSql = 'SELECT * FROM users WHERE id = ?';
-    const worksSql = 'SELECT * FROM works WHERE user_id = ?'; // 변경된 SQL
-    const commentsSql = 'SELECT * FROM comments WHERE user_id = ?'; // 변경된 SQL
+    const worksSql = 'SELECT * FROM works WHERE work_id = ?'; // 변경된 SQL
+    const commentsSql = 'SELECT * FROM comments WHERE target_id = ?'; // 변경된 SQL
 
     // 데이터베이스 쿼리 실행 (query 함수는 여기에서 정의되어야 함)
     const [userResults, worksResults, commentsResults] = await Promise.all([
@@ -94,6 +94,7 @@ app.get('/users/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 // /works 경로로 GET 요청 처리
@@ -215,21 +216,17 @@ app.delete('/comments/:comment_id', cors(corsOptions), async (req, res) => {
 // 방명록 작성 API
 app.post('/guestbooks', cors(corsOptions), async (req, res) => {
   const { guestname, password, guestbook } = req.body;
-  const insertQuery = 'INSERT INTO comments (guestname, password, guestbook) VALUES (?, ?, ?)';
+  const insertQuery = 'INSERT INTO guestbooks (guestname, password, guestbook) VALUES (?, ?, ?)';
 
-  try {
-    await connection.query(insertQuery, [guestname, password, guestbook], (err, result) => {
-      if (err) {
-        throw new Error('Error creating comment:', err)
-      } else {
-        const newGuestbookId = result.insertId; // 삽입된 comment_id 값
-        res.json({ message: '댓글이 작성되었습니다.', guestbook_id: newGuestbookId, guestname, guestbook });
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
+  connection.query(insertQuery, [guestname, password, guestbook], (err, result) => {
+    if (err) {
+      console.error('Error creating comment:', err);
+      res.status(500).json({ message: 'Internal Server Error' });
+    } else {
+      const newGuestbookId = result.insertId; // 삽입된 comment_id 값
+      res.json({ message: '댓글이 작성되었습니다.', guestbook_id: newGuestbookId, guestname, guestbook });
+    }
+  });
 });
 
 
