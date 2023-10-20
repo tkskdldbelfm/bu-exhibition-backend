@@ -19,7 +19,7 @@ const dbConfig = {
 
 const origins = [
   'https://web-bu-web-exhibition-fq2r52kllqhhlnh.sel3.cloudtype.app',
-  'http://bu-webdesign.site',
+  'https://bu-webdesign.site',
   'http://127.0.0.1:5500'
 ];
 
