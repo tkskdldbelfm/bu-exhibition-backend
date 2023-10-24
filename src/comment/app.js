@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql'); // mysql 사용
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,11 +13,11 @@ app.use(bodyParser.json());
 
 
 const dbConfig = {
-  host: 'svc.sel3.cloudtype.app',
-  port: '30382',
-  user: 'gwang',
-  password: 'Dlrhkddnjs1!',
-  database: 'exhibitiondata'
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  user: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME
 };
 
 const origins = [

@@ -1,0 +1,4 @@
+# .gitignore 파일
+
+# dotenv environment variables file
+.env
