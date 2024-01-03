@@ -1,4 +1,4 @@
-const serverUrl = '';
+const serverUrl = 'https://bu-webdesign.site';
 
 async function fetchDataFromServer(endpoint) {
   try {
