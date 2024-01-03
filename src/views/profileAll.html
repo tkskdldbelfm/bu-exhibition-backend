@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>웹 프로젝트 졸업전시</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="font-family.css" />
+  <script src="./js/header.js"></script>
+  <script src="./js/pagesize.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="header_container">
+      <div class="button">
+        <a href="/" class="header_btn">홈</a>
+        <a href="./comment/comment.html" class="header_btn">방명록</a>
+        <a href="search.html" class="header_btn active">프로필</a>
+        <div class="search">
+          <form id="searchProfile" class="searchBox">
+            <input type="text" name="username" autocomplete="off" id="searchInput" autocomplete="off"
+              placeholder="프로필 검색" />
+            <button id="searchButton">
+              <img src="./icons/search-stroke.svg" alt="search-stroke" />
+            </button>
+          </form>
+          <div id="searchResults" class="autocompleteResults"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="profileAll">
+      <h1 class="sectionTitle">Profile</h1>
+      <div class="profileBox">
+        <div id="profileBoxLeft">
+          <img src="./profileimg/이광원.jpg" alt="" id="profileImage">
+          <div class="phoneAndEmail">
+            <div class="profileContact">
+              <img src="./icons/call-outline.svg" alt="">
+              <p id="userPhone"></p>
+            </div>
+            <div class="profileContact">
+              <img src="./icons/email-outline.svg" alt="">
+              <p id="userEmail"></p>
+            </div>
+          </div>
+        </div>
+        <div id="profileBoxRight">
+          <div id="profileInfo">
+            <div class="profileName">
+              <div class="profiletextGroup">
+                <span id="profileUsername">이광원</span>
+                <span class="teamAndJob" id="profileTeam">소셜허브</span>
+
+              </div>
+            </div>
+            <p id="profileHashtags">#소통하는 #성장하는 #꼼꼼한 #효율적인 #창의적인 #논리적인</p>
+          </div>
+          <div class="profileProjects">
+            <div class="projectGroup">
+              <h3>Main Project</h3><span class="work_title" id="mainProjectTitle">Title</span>
+            </div>
+            <div class="projectGroup">
+              <h3>Sub Project</h3><span class="work_title" id="subProjectTitles">Title, Title</span>
+            </div>
+          </div>
+          <div class="intro">
+            <div class="titleGroup">
+              <h2>소개</h2>
+              <img id="introBtn" src="./icons/down-outline.svg" alt="" class="moreBtn expanded">
+            </div>
+            <p id="profileIntro">안녕하세요! 저는 열정적인 UI/UX 디자이너입니다. 사용자 중심의 디자인을 추구하며, 간결하고 직관적인 경험을 제공하는 것을 목표로 하고 있습니다. 다양한
+              프로젝트를 통해 디자인과 사용자 경험을 조화롭게 결합하여 제품의 가치를 높이는 일에 큰 흥미를 느낍니다. 새로운 도전을 두려워하지 않고, 최신 디자인 트렌드와 기술을 끊임없이 학습하며
+              발전하는 디자이너로서의 역량을 갖추고 있습니다. 함께 일하며 혁신적이고 매력적인 디지털 제품을 만들어나가는 것을 기대하고 있습니다.</p>
+          </div>
+        </div>
+        <div id="profileAwards">
+          <div class="titleGroup">
+            <h2>Awards & Experience</h2>
+            <img id="awardsBtn" src="./icons/down-outline.svg" alt="" class="moreBtn expanded">
+          </div>
+          <ul id="awardsList">
+
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="worksInfo">
+      <div class="aside">
+        <h2 id="title">Projects</h2>
+        <div class="worksTitleSlider">
+          <ul id="worksTitle">
+            <li class="active">체커 - 손쉬운 흡연관리 앱</li>
+            <li>체커 - 손쉬운 흡연관리 앱</li>
+            <li>체커 - 손쉬운 흡연관리 앱</li>
+            <li>체커 - 손쉬운 흡연관리 앱</li>
+          </ul>
+          <select name="" id="worksTitleMobile">
+
+          </select>
+        </div>
+      </div>
+      <div class="worksBody">
+        <div class="useTools">
+          <h3>Use Tool</h3>
+          <div class="tools" id="useTools">
+            <img src="./icons/figma.png" alt="">
+            <img src="./icons/ps.png" alt="">
+            <img src="./icons/xd.png" alt="">
+            <img src="./icons/ai.png" alt="">
+            <img src="./icons/more.png" alt="">
+          </div>
+        </div>
+        <p id="work_body">work_body</p>
+        <div class="links">
+          <a href="#">prototypelink</a>
+          <a href="#">sitelink</a>
+          <a href="#">sitelink</a>
+        </div>
+        <div class="worksImg">
+          <img id="workImage" src="#" alt="">
+        </div>
+      </div>
+    </section>
+
+    <section id="commentSection">
+      <h1>응원의 한마디</h1>
+
+      <div class="add-comment">
+        <form id="commentForm">
+          <label for="tatget_id" id="commentUsername">이광원 님에게 응원의 한마디를 남겨보세요.</label>
+          <select id="target_id" name="이름">
+            <!--option value는 불러오는 id값과 같아야함-->
+            <option id="optionValue"></option>
+          </select>
+          <input type="text" id="nickname" autocomplete="off" placeholder="닉네임" required />
+          <input type="password" id="password" autocomplete="off" placeholder="비밀번호" required />
+
+          <div class="text_area">
+            <textarea id="comment" placeholder="댓글을 입력해 주세요." required></textarea>
+            <button id="commentBtn" type="submit">작성하기</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="comments">
+        <h2 class="sectionTitle">작성된 응원 목록</h2>
+        <div id="commentsList">
+          <div class="comment-container">
+            <ul>
+              <li>익명의 방문자<samp>2023-08-26T20:43:00.000Z</samp></li>
+              <button>삭제하기</button>
+            </ul>
+            <li>내용입니다.</li>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contents-container">
+      <div class="contents">
+        <div class="first-content">
+          <p class="footer-tit">CheckMate</p>
+          <p class="footer-project-tit">web design</p>
+        </div>
+        <div class="second-content">
+          <div class="anchors">
+            <a href="/">홈</a>
+            <a href="./comment/comment.html">방명록</a>
+            <a href="./search.html">프로필</a>
+          </div>
+          <div class="site-info">
+            <p>2023 백석대학교 디자인영상학부 시각디자인전공 웹 미디어 디자인 프로젝트반 온라인 졸업전시회</p>
+            <div class="offline-info">
+              <h2>오프라인 전시</h2>
+              <div>
+                <span class="off-option">장소</span>
+                <span class="off-text">충청남도 천안시 동남구 문암로 76 백석대학교, 조형관 갤러리 1관</span>
+              </div>
+              <div>
+                <span class="off-option">기간</span>
+                <span class="off-text">2023.10.30(월) ~ 2023.11.04(토) 09:00 ~ 18:00</span>
+              </div>
+            </div>
+          </div>
+          <p class="sub-info">@2023 Baekseok University Department of Design and Imaging, Visual Design Major Web Media
+            Design Project Class Graduation Online Exhibition Site</p>
+        </div>
+        <div class="third-content">
+          <h3 class="creat-title">@Creat By</h3>
+          <div>
+            <span class="creat-option">기획/디자인/개발</span>
+            <span class="creat-text">이광원</span>
+          </div>
+          <div>
+            <span class="creat-option">영상제작</span>
+            <span class="creat-text">방민수</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/search.js"></script>
+  <script src="./comment/comment.js"></script>
+  <script src="./js/profileAll.js"></script>
+</body>
+
+</html>

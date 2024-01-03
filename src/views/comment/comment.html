@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>댓글 기능 테스트</title>
+    <link rel="stylesheet" href="../font-family.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../js/header.js"></script>
+    <script src="../js/pagesize.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header_container">
+            <div class="button">
+                <a href="/" class="header_btn">홈</a>
+                <a href="#" class="header_btn active">방명록</a>
+                <a href="../search.html" class="header_btn">프로필</a>
+                <div class="search">
+                    <form id="searchProfile" class="searchBox">
+                        <input type="text" autocomplete="off" name="selected" id="searchInput" placeholder="프로필 검색" />
+                        <button id="searchButton">
+                            <img src="../icons/search-stroke.svg" alt="search-stroke" />
+                        </button>
+                    </form>
+                    <div id="searchResults" class="autocompleteResults"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="guestBookSection">
+            <h1>BU WEB EXHIBITION 2023</h1>
+
+            <div class="add-comment">
+                <form id="commentForm">
+                    <label for="tatget_id">방명록을 남겨보세요</label>
+
+                    <input type="text" id="nickname" placeholder="닉네임" required />
+                    <input type="password" id="password" placeholder="비밀번호" required />
+
+                    <div class="text_area">
+                        <textarea id="comment" placeholder="댓글을 입력해 주세요." required></textarea>
+                        <button id="commentBtn" type="submit">댓글 작성하기</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="comments">
+                <h2 class="sectionTitle">작성된 방명록</h2>
+                <div id="commentsList">
+                    <div class="comment-container">
+                        <li>익명의 방문자</li>
+                        <li><samp>2023-08-26T20:43:00.000Z</samp></li>
+                        <button class="deleteBtn">삭제하기</button>
+                        <li>댓글내용입니다.댓글내용입니다.</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer>
+        <div class="contents-container">
+            <div class="contents">
+                <div class="first-content">
+                    <p class="footer-tit">CheckMate</p>
+                    <p class="footer-project-tit">web design</p>
+                </div>
+                <div class="second-content">
+                    <div class="anchors">
+                        <a href="/">홈</a>
+                        <a href="./comment.html">방명록</a>
+                        <a href="../search.html">프로필</a>
+                    </div>
+                    <div class="site-info">
+                        <p>2023 백석대학교 디자인영상학부 시각디자인전공 웹 미디어 디자인 프로젝트반 온라인 졸업전시회</p>
+                        <div class="offline-info">
+                            <h2>오프라인 전시</h2>
+                            <div>
+                                <span class="off-option">장소</span>
+                                <span class="off-text">충청남도 천안시 동남구 문암로 76 백석대학교, 조형관 갤러리 1관</span>
+                            </div>
+                            <div>
+                                <span class="off-option">기간</span>
+                                <span class="off-text">2023.10.30(월) ~ 2023.11.04(토) 09:00 ~ 18:00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="sub-info">@2023 Baekseok University Department of Design and Imaging, Visual Design Major
+                        Web Media
+                        Design Project Class Graduation Online Exhibition Site</p>
+                </div>
+                <div class="third-content">
+                    <h3 class="creat-title">@Creat By</h3>
+                    <div>
+                        <span class="creat-option">기획/디자인/개발</span>
+                        <span class="creat-text">이광원</span>
+                    </div>
+                    <div>
+                        <span class="creat-option">영상제작</span>
+                        <span class="creat-text">방민수</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="../js/index.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="guestbook.js"></script>
+</body>
+
+</html>

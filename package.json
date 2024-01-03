@@ -4,7 +4,7 @@
   "description": "bu_webdesign_exhibition_backend",
   "main": "./src/comment/app.js",
   "scripts": {
-    "start": "node ./src/comment/app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +14,7 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mariadb": "^3.2.0",
     "mysql": "^2.18.1"

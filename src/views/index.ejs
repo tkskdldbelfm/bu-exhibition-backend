@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>웹 프로젝트 졸업전시</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="font-family.css" />
+  <script src="./js/header.js"></script>
+  <script src="./js/pagesize.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header_container">
+      <div class="button">
+        <a href="/" class="header_btn active">홈</a>
+        <a href="./comment/comment.html" class="header_btn">방명록</a>
+        <a href="search.html" class="header_btn">프로필</a>
+        <div class="search">
+          <form id="searchProfile" class="searchBox">
+            <input type="text" name="username" autocomplete="off" id="searchInput" placeholder="프로필 검색" />
+            <button type="submit" id="searchButton">
+              <img src="./icons/search-stroke.svg" alt="search-stroke" />
+            </button>
+          </form>
+          <div id="searchResults" class="autocompleteResults"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="mainBanner">
+    <div id="mainBannerCopy">
+      <h1>BU WEB EXHIBITION 2023</h1>
+      <p>백석대학교 디자인영상학부 시각디자인전공 웹 미디어 디자인 프로젝트 졸업전시회</p>
+    </div>
+    <video id="banner" autoplay loop>
+      <source id="videoSource" src="./video/web_banner.mp4">
+      Sorry, your browser doesn't support embedded videos.
+    </video>
+  </article>
+
+  <main>
+    <section id="professor">
+      <h1 class="sectionTitle">담당 교수님</h1>
+      <div class="professor-box">
+        <div class="profile">
+          <div id="lhj" class="professor-name active">이향재 교수님</div>
+          <div id="wjs" class="professor-name">우정숙 교수님</div>
+        </div>
+        <div class="text">
+          <p id="firstP" class="pharse">"축하합니다"</p>
+          <p id="secondP" class="pharse">열정과 패기로 새로운 미래를 향해 출발하는 여러분께 진심으로 응원과 박수를 보내며</p>
+          <p id="thirdP" class="pharse">졸업생들 여러분의 앞날에 하나님의 은혜와 축복이 함께 하길 기도합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="underGraduate">
+      <h1 class="sectionTitle">undergraduate</h1>
+      <div class="contentsWrap">
+        <ul class="selectBg">
+          <li>
+            <div class="selectArea">
+              <div class="select active default">
+                <img class="minImg" src="#" alt="" />
+                <div class="selectText">
+                  <p></p>
+                </div>
+                <img src="./icons/down-outline.svg" alt="down-outline" class="openSelectBtn">
+              </div>
+              <div class="selectList"></div>
+            </div>
+          </li>
+          <li>
+            <div class="selectListModal"></div>
+          </li>
+          <li>
+            <div class="projectsContainer">
+              <div class="projectsSlider">
+                <div class="projectCard">
+                  <h3 class="bold">workname</h3>
+                  <img class="projectImg" src="" alt="" />
+                  <p>work_intro</p>
+                </div>
+                <div class="projectCard">
+                  <h3 class="bold">workname</h3>
+                  <img class="projectImg" src="" alt="" />
+                  <p>work_intro</p>
+                </div>
+                <div class="projectCard">
+                  <h3 class="bold">workname</h3>
+                  <img class="projectImg" src="" alt="" />
+                  <p>work_intro</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <img class="cardBtn left fade-out" src="./icons/left-outline.svg" alt="left-outline">
+        <img class="cardBtn right" src="./icons/right-outline.svg" alt="left-outline">
+      </div>
+    </section>
+
+    <section id="creadit">
+      <h1 class="sectionTitle">Creadit</h1>
+      <div class="contentsWrap">
+        <div class="undergraduate">
+          <h3>웹 프로젝트반</h3>
+          <ul class="creadit-username">
+          </ul>
+        </div>
+        <div class="stillCut">
+          <h3>Still Cut</h3>
+          <ul class="stillCutImgs">
+            <li class="stillcuts"><img src="./etc/작은사진1.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/중간사진1.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/작은사진2.webp" alt=""></li>
+
+            <li class="stillcuts"><img src="./etc/중간사진2.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/작은사진3.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/작은사진4.webp" alt=""></li>
+
+            <li class="stillcuts"><img src="./etc/큰사진1.webp" alt=""></li>
+
+            <li class="stillcuts"><img src="./etc/중간사진3.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/작은사진5.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/작은사진6.webp" alt=""></li>
+
+            <li class="stillcuts"><img src="./etc/작은사진7.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/중간사진4.webp" alt=""></li>
+            <li class="stillcuts"><img src="./etc/작은사진8.webp" alt=""></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contents-container">
+      <div class="contents">
+        <div class="first-content">
+          <p class="footer-tit">CheckMate</p>
+          <p class="footer-project-tit">web design</p>
+        </div>
+        <div class="second-content">
+          <div class="anchors">
+            <a href="./index2.html">홈</a>
+            <a href="./comment/comment.html">방명록</a>
+            <a href="./search.html">프로필</a>
+          </div>
+          <div class="site-info">
+            <p>2023 백석대학교 디자인영상학부 시각디자인전공 웹 미디어 디자인 프로젝트반 온라인 졸업전시회</p>
+            <div class="offline-info">
+              <h2>오프라인 전시</h2>
+              <div>
+                <span class="off-option">장소</span>
+                <span class="off-text">충청남도 천안시 동남구 문암로 76 백석대학교, 조형관 갤러리 1관</span>
+              </div>
+              <div>
+                <span class="off-option">기간</span>
+                <span class="off-text">2023.10.30(월) ~ 2023.11.04(토) 09:00 ~ 18:00</span>
+              </div>
+            </div>
+          </div>
+          <p class="sub-info">@2023 Baekseok University Department of Design and Imaging, Visual Design Major Web Media
+            Design Project Class Graduation Online Exhibition Site</p>
+        </div>
+        <div class="third-content">
+          <h3 class="creat-title">@Creat By</h3>
+          <div>
+            <span class="creat-option">기획/디자인/개발</span>
+            <span class="creat-text">이광원</span>
+          </div>
+          <div>
+            <span class="creat-option">영상제작</span>
+            <span class="creat-text">방민수</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="loadingMotion.js"></script>
+  <script src="./js/search.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/profileAll.js"></script>
+  <!--<script src="./js/undergraduate.js"></script>-->
+
+</body>
+
+</html>

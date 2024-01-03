@@ -1,0 +1,2794 @@
+html {
+  font-size: 16px;
+  font-display: block;
+}
+
+body {
+  font-family: Noto Sans KR;
+  background: var(--page-bg);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: var(--header-text-on);
+}
+
+
+ul,
+li,
+button,
+input,
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  object-fit: cover;
+}
+
+:root {
+  --page-bg: #1e1e1e;
+  --header-bg: rgba(0, 0, 0, 0.8);
+  --header-text-on: #ffffff;
+  --header-text-off: #767676;
+  --header-text-hover: #d9d9d9;
+  --section-box-bg: #141414;
+  --text-off-Btn: #353535;
+  --border-point: #3dd6b1;
+  --dark-input-text: #c4c4c4;
+  --footer-off-text: #353535;
+  --footer-regular-text: #c4c4c4;
+  --footer-option-text: #707070;
+}
+
+a {
+  text-decoration: none;
+}
+
+.mainBanner {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #000000;
+}
+
+.mainBanner video {
+  height: 100vh;
+}
+
+
+#mainBannerCopy {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mainBannerCopy h1 {
+  font-size: 6rem;
+}
+
+#mainBannerCopy p {
+  font-size: 1.5rem;
+}
+
+/*Header*/
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--header-bg);
+  z-index: 3;
+  transition: opacity 0.3s ease-in-out;
+}
+
+header {
+  opacity: 1;
+}
+
+.header_btn {
+  color: var(--header-text-off);
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  transition: 0.3s ease-out;
+}
+
+.header_btn:hover {
+  color: var(--header-text-hover);
+}
+
+.header_btn.active {
+  color: var(--header-text-on);
+}
+
+.header_container {
+  width: 75%;
+}
+
+.button {
+  display: flex;
+
+  height: 5rem;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/*Header검색창*/
+.searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0.063rem solid #fff;
+  border-style: inset;
+  width: 13.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+#searchInput::placeholder {
+  width: 9.75rem;
+  color: var(--header-text-off);
+  text-align: start;
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#searchInput {
+  width: 9.75rem;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--header-text-on);
+  text-align: start;
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#searchButton {
+  border: none;
+  background: none;
+}
+
+.autocompleteList {
+  height: 13.5rem;
+  overflow-y: scroll;
+  margin-top: 0.75rem;
+  position: absolute;
+  border-radius: 0.5rem;
+  border: 0.063rem solid #fff;
+  border-style: inset;
+  background: var(--page-bg);
+  width: 15rem;
+}
+
+.autocompleteList::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.autocompleteList::-webkit-scrollbar-thumb {
+  background: linear-gradient(#35f695, #98d6ff);
+  border-radius: 1rem;
+}
+
+.autocompleteList::-webkit-scrollbar-track {
+  width: 1rem;
+  background-color: var(--header-text-off);
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.autocompleteList li {
+  color: var(--header-text-off);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0.75rem;
+}
+
+.autocompleteList li:hover {
+  cursor: pointer;
+  color: var(--header-text-on);
+}
+
+main {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7.5rem;
+}
+
+main section:first-child {
+  margin-top: 3.75rem;
+}
+
+/*Profile Search page*/
+#personalProfile {
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+}
+
+.contentsWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#personalProfile .contentsWrap {
+  display: flex;
+  width: 90rem;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 3rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.profileCard {
+  cursor: pointer;
+
+  display: flex;
+  width: 21.375rem;
+  padding: 1.5rem 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  border-radius: 0.75rem;
+  border-top: 1px solid var(--border-point);
+  background: var(--section-box-bg);
+  transition: 0.3s ease-in-out;
+}
+
+.profileCard:hover {
+  box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.15);
+}
+
+.profileImg {
+  width: 18.375rem;
+  height: 21.1875rem;
+
+  border-radius: 0.75rem;
+}
+
+.profileCardName {
+  color: #fff;
+  font-family: Inter;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+h1 {
+  color: #fff;
+  font-family: Inter;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+/*폰트*/
+
+.bold {
+  font-weight: 700;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+}
+
+/*section 프로페서*/
+#professor .professor-box {
+  display: flex;
+  gap: 3rem;
+  width: 90rem;
+  height: 40rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 0.75rem;
+}
+
+#professor .profile {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  align-self: stretch;
+}
+
+#professor .professor-name {
+  display: flex;
+  height: 6rem;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+
+
+  color: var(--header-text-on);
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: capitalize;
+
+  transition: 0.3s ease-out;
+}
+
+
+#professor .professor-box .text {
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  overflow-y: scroll;
+}
+
+#professor .professor-box .text::-webkit-scrollbar {
+  display: none;
+}
+
+#professor .professor-box .text p {
+  font-family: Noto Sans KR;
+  font-style: normal;
+  line-height: normal;
+  text-transform: capitalize;
+
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+#professor .professor-box .text .pharse {
+  opacity: 0;
+  transform: translateY(5rem);
+  transition: opacity 3s ease-out, transform 1s ease-out;
+}
+
+#professor .professor-box .text #firstP {
+  font-size: 3rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+#professor .professor-box .text #secondP {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+#professor .professor-box .text #thirdP {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+/*section 컨테이너 *특수*/
+
+.cardBtn {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  position: absolute;
+}
+
+.cardBtn.left {
+  left: 0;
+}
+
+.cardBtn.right {
+  right: 0;
+}
+
+.minImg {
+  margin-left: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+}
+
+.selectBg {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  border-radius: 0.75rem;
+  background: var(--section-box-bg);
+}
+
+.selectBg:first-child {
+  background: #383838;
+}
+
+.selectArea {
+  display: flex;
+  width: 19.875rem;
+  height: 40.125rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.75rem 0 0 0.75rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.selectArea::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.selectArea::-webkit-scrollbar-thumb {
+  background: linear-gradient(#35f695, #98d6ff);
+}
+
+.selectArea::-webkit-scrollbar-track {
+  width: 0.5rem;
+  background-color: var(#383838);
+}
+
+.select {
+  display: flex;
+  height: 4.5rem;
+  width: 19.875rem;
+  padding-left: 0px;
+  align-items: center;
+  gap: 1.5rem;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+}
+
+.select:hover {
+  background: var(--header-text-hover);
+}
+
+.selectListModal {
+  display: none;
+}
+
+.selectText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.94rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.selectText p {
+  color: var(--header-text-off);
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+
+
+#profileBoxLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#profileBoxLeft .phoneAndEmail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+#profileBoxLeft .profileContact {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  justify-content: flex-start;
+}
+
+#profileBoxLeft .profileContact p {
+  font-size: 0.875rem;
+}
+
+#profileBoxLeft .profileContact img {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.contactWrap p {
+  color: var(--header-text-off);
+  font-family: Noto Sans KR;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.select.active {
+  display: flex;
+  width: 19.875rem;
+  height: 6rem;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  border-bottom: 2px solid #3dd6b1;
+}
+
+.select.active.default {
+  display: none;
+}
+
+.openSelectBtn {
+  display: none;
+}
+
+.select.active:hover {
+  background: none;
+}
+
+.select.active .minImg {
+  margin-top: 1rem;
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+.select.active .contactWrap {
+  display: flex;
+}
+
+.select.active .selectText p {
+  color: var(--header-text-on);
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.select.active .contactWrap p {
+  color: var(--header-text-on);
+  font-family: Noto Sans KR;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.projectsContainer {
+  display: flex;
+  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: var(--section-box-bg);
+  border-left: 1px solid #707070;
+  box-shadow: -4px 0px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+.projectsSlider {
+  display: flex;
+  /* 프로젝트 카드들을 가로로 나열 */
+
+  overflow: none;
+  gap: 1.5rem;
+}
+
+.cardBtn {
+  display: none;
+}
+
+.projectCard {
+  cursor: pointer;
+  display: flex;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  border-radius: 0.75rem;
+  border-top: 1px solid #3dd6b1;
+  background: var(--section-box-bg);
+  transition: 0.3s ease-out;
+
+  position: relative;
+  bottom: 0px;
+}
+
+
+
+.projectCard:hover {
+  position: relative;
+  bottom: 0.5rem;
+  box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.15);
+}
+
+.projectImg {
+  width: 18.375rem;
+  height: 26rem;
+
+  border-radius: 0.75rem;
+}
+
+.projectCard p {
+  width: 18.375rem;
+  height: 3.5625rem;
+
+  overflow-y: scroll;
+  color: #fff;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+p::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+/*section 컨테이너 *4*/
+
+/*ProfileAll*/
+#profileAll {
+  width: 90rem;
+}
+
+.profileBox {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--section-box-bg);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-point);
+}
+
+
+
+#profileBoxLeft img {
+  width: 15.25rem;
+  height: 17.625rem;
+  border-radius: 0.75rem;
+}
+
+#profileBoxRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 44.875rem;
+}
+
+#profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#profileInfo .teamAndJob {
+  color: var(--header-text-off);
+}
+
+.profileName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.profileName .profiletextGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profileName a {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--footer-option-text);
+}
+
+.profileName a:hover {
+  color: var(--border-point);
+}
+
+.profileProjects {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+
+
+.projectGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profileProjects h3 {
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+p#profileIntro {
+  width: 44.875rem;
+
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 0.75rem;
+}
+
+#profileUsername {
+
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+
+
+
+#profileAwards {
+  display: flex;
+  flex-direction: column;
+  width: 23.875rem;
+  gap: 1.5rem;
+}
+
+
+#profileAwards h2 {
+  margin-bottom: 0.5rem;
+}
+
+#profileAwards ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#profileAwards li {
+  display: flex;
+  align-items: center;
+  font-family: Noto Sans KR;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+
+.moreBtn {
+  display: none;
+}
+
+
+
+/*worksInfo*/
+
+#worksInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+/*aside*/
+.work_title {
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+.aside {
+  position: sticky;
+  top: 6rem;
+  height: 20rem;
+  z-index: 100;
+  /* 다른 요소 위에 놓이도록 z-index 설정 */
+  display: flex;
+  flex-direction: column;
+  width: 18.75rem;
+  gap: 2.25rem;
+}
+
+#worksList #title {
+  font-family: Noto Sans KR;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+#worksTitle li {
+  cursor: pointer;
+  color: var(--header-text-off);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 1.5rem;
+}
+
+#worksTitle li.active {
+  color: var(--header-text-on);
+}
+
+#worksTitleMobile {
+  display: none;
+}
+
+/*worksbody*/
+
+.worksBody {
+  width: 67.5rem;
+
+}
+
+#work_body {
+  padding: 0 0 1.5rem 0;
+}
+
+.worksImg img {
+  width: 100%;
+}
+
+.useTools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+#useTools {
+  display: flex;
+  gap: 0.75rem;
+}
+
+#useTools img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+}
+
+.links a {
+  color: var(--border-point);
+  background: var(--section-box-bg);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  transition: 0.2s ease-out;
+}
+
+.links a:hover {
+  color: var(--section-box-bg);
+  background: var(--border-point);
+}
+
+.links div {
+  width: 90rem;
+  height: 38.089rem;
+}
+
+.links h3 {
+  width: 90rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+
+/*Comment 댓글*/
+.new-tag {
+
+  color: var(--border-point);
+}
+
+#commentSection {
+  width: 90rem;
+}
+
+#guestBookSection {
+  width: 90rem;
+}
+
+#commentSection h1 {
+  font-family: Noto Sans KR;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.add-comment {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+
+.add-comment h2 {
+  margin-bottom: 1.5rem;
+}
+
+.comments {
+  margin-bottom: 20px;
+}
+
+.comment-container {
+  margin-top: 3.75rem;
+}
+
+
+samp {
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--dark-input-text);
+  margin-left: 1.5rem;
+}
+
+#commentsList ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+
+#commentsList ul li {
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+}
+
+#commentsList button {
+  cursor: pointer;
+  border-style: none;
+  background: none;
+
+
+  color: var(--text-off-Btn);
+  display: flex;
+  padding: 0.5rem 0.75rem;
+  align-items: flex-start;
+
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.comment-container li:last-child {
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  color: var(--dark-input-text);
+  padding: 1.5rem;
+
+  border-radius: 0.75rem;
+  background: #141414;
+}
+
+#comment {
+  height: 3rem;
+}
+
+
+#commentForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+input[type="text"]#nickname {
+  display: flex;
+  width: 12.5rem;
+  padding: 0.5rem 0.75rem;
+  align-items: flex-start;
+  color: var(--dark-input-text);
+  border-style: none;
+
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-radius: 0.75rem;
+  background: #141414;
+}
+
+input[type="password"]#password {
+  display: flex;
+  width: 7.5rem;
+  padding: 0.5rem 0.75rem;
+  align-items: flex-start;
+
+  color: var(--dark-input-text);
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+
+  border-style: none;
+  border-radius: 0.75rem;
+  background: #141414;
+}
+
+.text_area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+textarea#comment {
+  display: flex;
+  width: 87rem;
+  height: 10rem;
+  padding: 1.5rem;
+  align-items: flex-start;
+
+  color: var(--dark-input-text);
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-radius: 0.75rem;
+  border-top: 2px solid var(--border-point);
+  background: #141414;
+}
+
+button#commentBtn {
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-style: none;
+  padding: 0.25rem 0rem;
+  width: 8rem;
+  border-radius: 0.5rem;
+  background-color: #3b3b3b;
+  color: #c4c4c4;
+  transition: 0.3s ease-out;
+}
+
+button#commentBtn:hover {
+  background-color: var(--border-point);
+  color: #000000;
+}
+
+#commentList {
+  width: 90rem;
+}
+
+#target_id {
+  display: none;
+  text-align: center;
+  padding: 0 0.75rem 0 0.75rem;
+  height: 2.75rem;
+  border-radius: 0.5rem;
+}
+
+/*creadit*/
+#creadit {
+  display: flex;
+  align-items: center;
+}
+
+#creadit .contentsWrap {
+  flex-direction: column;
+  gap: 3.72rem;
+}
+
+#creadit .contentsWrap .creadit-username {
+  display: flex;
+  width: 41.5rem;
+  padding-bottom: 0px;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 2.25rem;
+  flex-wrap: wrap;
+}
+
+#creadit .contentsWrap .creadit-username {
+  opacity: 0;
+  transform: translateY(5rem);
+  transition: opacity 2.5s ease-out, transform 1s ease-out;
+}
+
+.undergraduate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.75rem;
+}
+
+#creadit div h3 {
+  font-weight: 400;
+  font-size: 2.25rem;
+}
+
+.creadit-username li {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.stillCut {
+  display: flex;
+  flex-direction: column;
+  width: 90rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+  row-gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stillCutImgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.stillCutImgs li {
+  display: flex;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 0.75rem;
+  border-top: 1px solid #3DD6B1;
+  background: #141414;
+}
+
+.stillCutImgs li:nth-child(1) img,
+.stillCutImgs li:nth-child(3) img,
+.stillCutImgs li:nth-child(5) img,
+.stillCutImgs li:nth-child(6) img,
+.stillCutImgs li:nth-child(8) img,
+.stillCutImgs li:nth-child(9) img,
+.stillCutImgs li:nth-child(11) img,
+.stillCutImgs li:nth-child(13) img {
+  width: 18.375rem;
+  height: 21.1875rem;
+  border-radius: 0.75rem;
+}
+
+.stillCutImgs li:nth-child(2) img,
+.stillCutImgs li:nth-child(4) img,
+.stillCutImgs li:nth-child(10) img,
+.stillCutImgs li:nth-child(12) img {
+  width: 41.25rem;
+  height: 21.1875rem;
+  border-radius: 0.75rem;
+}
+
+.stillCutImgs li:nth-child(7) img {
+  width: 87rem;
+  height: 21.1875rem;
+  border-radius: 0.75rem;
+}
+
+.stillcuts {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+}
+
+/*footer*/
+footer {
+  width: 100%;
+  background: var(--section-box-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7.5rem;
+}
+
+.contents-container {
+  display: flex;
+  width: 90rem;
+  padding: 3.75rem 0rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.75rem;
+}
+
+.contents-container .contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.contents .first-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.first-content .footer-tit {
+  color: var(--footer-off-text);
+  font-family: Darker Grotesque;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.first-content .footer-project-tit {
+  color: var(--footer-regular-text);
+  font-family: Darker Grotesque;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.contents .second-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.second-content .anchors {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.second-content .anchors a {
+  color: var(--footer-regular-text);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.second-content .site-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid #3DD6B1;
+}
+
+.site-info p {
+  color: var(--footer-regular-text);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.site-info .offline-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.offline-info div {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.offline-info h2 {
+  color: var(--footer-regular-text);
+  font-family: Noto Sans KR;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.offline-info .off-option {
+  color: var(--footer-option-text);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.offline-info .off-text {
+  color: var(--footer-regular-text);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.second-content .sub-info {
+  color: var(--footer-off-text);
+  font-family: Noto Sans KR;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.contents .third-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.third-content .creat-title {
+  color: var(--footer-option-text);
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.third-content div {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.third-content div .creat-option {
+  color: var(--footer-option-text);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.third-content div .creat-text {
+  color: var(--footer-regular-text);
+  font-family: Noto Sans KR;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+@media (min-width: 489px) {
+
+
+  .projectCard h3.bold {
+    width: 18.375rem;
+    height: 1.5rem;
+
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 488px) {
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  .mainBanner {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #000000;
+  }
+
+  .mainBanner video {
+    height: 100vh;
+
+  }
+
+
+
+  .profileCard {
+    cursor: pointer;
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 8.625rem;
+    padding: 0.5rem 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+
+    border-radius: 0.75rem;
+    border-top: 1px solid var(--border-point);
+    background: var(--section-box-bg);
+    transition: 0.3s ease-in-out;
+  }
+
+
+
+  .profileCardName {
+    font-size: 1rem;
+  }
+
+  .profileImg {
+    width: 8.5rem;
+    height: 9.8125rem;
+  }
+
+  #mainBannerCopy {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #mainBannerCopy h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  #mainBannerCopy p {
+    font-size: 0.5rem;
+  }
+
+
+  header {
+    width: 100%;
+  }
+
+  section {
+    gap: 1.75rem;
+  }
+
+  .header_container {
+    width: 90%;
+  }
+
+  .button {
+    display: flex;
+    height: 5rem;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+
+  .searchButton {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .header_btn {
+    color: var(--header-text-off);
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  /*Header검색창*/
+  .searchBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 0.063rem solid #fff;
+    border-style: inset;
+    width: 6.5rem;
+  }
+
+  #searchInput::placeholder {
+    width: 6.5rem;
+    color: var(--header-text-off);
+    text-align: start;
+    font-family: Noto Sans KR;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  #searchInput {
+    width: 5.25rem;
+    border: none;
+    outline: none;
+    background: none;
+    color: var(--header-text-on);
+    text-align: start;
+    font-family: Noto Sans KR;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  #searchButton {
+    border: none;
+    background: none;
+  }
+
+  .autocompleteList {
+    width: 8rem;
+    height: 13.5rem;
+    overflow-y: scroll;
+    margin-top: 0.75rem;
+    position: absolute;
+    border-radius: 0.5rem;
+    border: 0.063rem solid #fff;
+    border-style: inset;
+    background: var(--page-bg);
+  }
+
+  .autocompleteList::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  .autocompleteList::-webkit-scrollbar-thumb {
+    background: linear-gradient(#35f695, #98d6ff);
+    border-radius: 1rem;
+  }
+
+  .autocompleteList::-webkit-scrollbar-track {
+    width: 1rem;
+    background-color: var(--header-text-off);
+    border-radius: 0 0.4rem 0.4rem 0;
+  }
+
+  .autocompleteList li {
+    color: var(--header-text-off);
+    font-family: Noto Sans KR;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0.75rem;
+  }
+
+  .autocompleteList li:hover {
+    cursor: pointer;
+    color: var(--header-text-on);
+  }
+
+  main {
+    align-items: center;
+    gap: 3.75rem;
+    width: 100%;
+  }
+
+  h1 {
+    color: #fff;
+    font-family: Inter;
+    font-size: 1.5rem;
+  }
+
+  /*section 프로페서*/
+  #professor .professor-box {
+    display: flex;
+    width: 17rem;
+    height: 100%;
+  }
+
+  #professor .professor-name {
+    height: 5.25rem;
+    font-size: 1.25rem;
+  }
+
+
+  #professor .professor-box .text #firstP {
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  #professor .professor-box .text #secondP {
+    font-size: 1.25rem;
+    text-align: center;
+    font-weight: 300;
+  }
+
+  #professor .professor-box .text #thirdP {
+    font-size: 1.25rem;
+    text-align: center;
+    font-weight: 300;
+  }
+
+  /*section 컨테이너 *특수*/
+
+  #underGraduate .contentsWrap {
+    overflow: hidden;
+    border-radius: 0.75rem;
+  }
+
+  .minImg {
+    margin-left: 0rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+  }
+
+  .selectBg {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 20rem;
+
+    border-radius: 0.75rem;
+    background: var(--section-box-bg);
+  }
+
+  .selectBg:first-child {
+    background: #383838;
+    position: relative;
+    z-index: 2;
+  }
+
+  .selectArea {
+    display: flex;
+    width: 20rem;
+    height: 4.5rem;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0rem;
+  }
+
+  .selectArea::-webkit-scrollbar {
+    width: 0rem;
+  }
+
+  .selectList {
+    display: none;
+    overflow-y: scroll;
+    position: relative;
+  }
+
+  .selectList::-webkit-scrollbar {
+    width: 0rem;
+  }
+
+  .select {
+    display: flex;
+    height: 4.5rem;
+    width: 20rem;
+    padding-left: 1rem;
+    align-items: center;
+    gap: 1.5rem;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+  }
+
+  .select:hover {
+    background: var(--header-text-hover);
+  }
+
+  .selectListModal {
+    display: none;
+    width: 20rem;
+    height: 33.5rem;
+
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0rem;
+
+    overflow-y: scroll;
+    position: absolute;
+    z-index: 2;
+
+    background: #383838;
+  }
+
+  .selectListModal::-webkit-scrollbar {
+    display: none;
+  }
+
+  .selectListModal .select {
+    width: 19rem;
+    transition: 0.3s ease-out;
+  }
+
+  .selectListModal .select.active {
+    display: none;
+    padding: 0.5rem;
+    border-bottom: 2px solid #3dd6b1;
+    background: var(--section-box-bg);
+  }
+
+  .selectListModal .select.active:hover {
+    background: var(--section-box-bg);
+  }
+
+  .selectListModal .select.active .selectText {
+    width: 12.375rem;
+  }
+
+  .select.active.default {
+    display: flex;
+  }
+
+  .select.active {
+    display: flex;
+    width: 19rem;
+    height: 4.75rem;
+    padding: 0 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    row-gap: 1.5rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+
+    border-bottom: 2px solid #3dd6b1;
+  }
+
+  .openSelectBtn {
+    display: block;
+
+    height: 1.25rem;
+  }
+
+  .select.active:hover {
+    background: none;
+  }
+
+  .selectText {
+    display: flex;
+  }
+
+  .selectText p {
+    color: var(--header-text-off);
+    font-family: Noto Sans KR;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .openSelectBtn.open {
+    transform: scaleY(-1);
+    /* 버튼 상하반전 */
+    animation: pulse 0.5s alternate infinite;
+    /* 선택한 버튼을 깜박이는 애니메이션 */
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scaleY(-1);
+    }
+
+    100% {
+      transform: scaleY(-1) translateY(-0px);
+    }
+  }
+
+  .contactWrap {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    display: none;
+  }
+
+  .contactWrap p {
+    color: var(--header-text-off);
+    font-family: Noto Sans KR;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .contact .contactWrap svg path {
+    fill: var(--header-text-off);
+  }
+
+  .select.active .minImg {
+    margin-top: 0rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .select.active .contactWrap {
+    display: none;
+  }
+
+  .select.active .selectText p {
+    color: var(--header-text-on);
+    font-family: Noto Sans KR;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .select.active .contactWrap p {
+    color: var(--header-text-on);
+    font-family: Noto Sans KR;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .projectsContainer {
+    display: flex;
+    padding: 0rem;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 0 0.75rem 0.75rem 0;
+    background: var(--section-box-bg);
+    border-left: none;
+    box-shadow: -4px 0px 8px 0px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+
+  .cardBtn {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    position: absolute;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+  }
+
+  .cardBtn.left {
+    left: 5vw;
+  }
+
+  .cardBtn.right {
+    right: 5vw;
+  }
+
+  /* 페이드 아웃 애니메이션 */
+  .fade-out {
+    opacity: 0;
+  }
+
+  /* 페이드 인 애니메이션 */
+  .fade-in {
+    opacity: 1;
+  }
+
+  .projectsSlider {
+    display: flex;
+    /* 프로젝트 카드들을 가로로 나열 */
+    gap: 0rem;
+    padding: 0rem;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+  }
+
+  .projectCard {
+    cursor: pointer;
+    display: flex;
+    padding: 1rem 2.25rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    border-radius: 0.75rem;
+    border-top: 0px;
+    background: var(--section-box-bg);
+    transition: none;
+  }
+
+  .projectCard h3.bold {
+    text-align: center;
+  }
+
+
+
+  .projectCard:hover {
+    position: relative;
+    bottom: 0rem;
+    box-shadow: none;
+  }
+
+  .slide-in {
+    transform: translateX(0);
+  }
+
+  .slide-out-left {
+    transform: translateX(-100%);
+  }
+
+  .slide-out-right {
+    transform: translateX(100%);
+  }
+
+  .projectImg {
+    width: 15.5rem;
+    height: 22rem;
+
+    border-radius: 0.75rem;
+  }
+
+  .projectCard p {
+    width: 15.5rem;
+    height: 3.5625rem;
+
+    overflow-y: scroll;
+    color: #fff;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  p::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  #personalProfile {
+    gap: 1.5rem;
+  }
+
+  #personalProfile .contentsWrap {
+    display: flex;
+    width: 20rem;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
+    gap: 0.75rem 0.75rem;
+    flex-wrap: wrap;
+  }
+
+
+  /*ProfileAll*/
+  #profileAll {
+    width: 20rem;
+  }
+
+  .profileBox {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--section-box-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-point);
+  }
+
+  #profileBoxLeft {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #profileBoxLeft img {
+    width: 4.0625rem;
+    height: 4.6875rem;
+    border-radius: 0.25rem;
+  }
+
+  #profileBoxLeft .phoneAndEmail {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0rem;
+  }
+
+  #profileBoxLeft .profileContact p {
+    font-size: 0.875rem;
+  }
+
+  #profileBoxLeft .profileContact {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  #profileBoxLeft .profileContact img {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .profileContact p {
+    font-family: Noto Sans KR;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  #profileBoxRight {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 17rem;
+  }
+
+  #profileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  #profileInfo .teamAndJob {
+    color: var(--header-text-off);
+    font-size: 0.875rem;
+  }
+
+  #profileInfo p {
+    width: 17rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+  }
+
+  .profileName {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .profileName .profiletextGroup {
+    gap: 0.5rem;
+  }
+
+  .profileName a {
+    text-align: end;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--border-point);
+  }
+
+
+  .profileProjects {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+
+  .profileProjects h3 {
+    font-family: Noto Sans KR;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .projectGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .titleGroup {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .titleGroup h2 {
+    font-size: 1.25rem;
+  }
+
+  .moreBtn {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 0;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .moreBtn.expanded {
+    transform: scaleY(-1);
+    animation: pulse 0.5s alternate infinite;
+  }
+
+  p#profileIntro {
+    width: 17rem;
+    display: block;
+    font-family: Noto Sans KR;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0.75rem;
+  }
+
+  /* 초기에 접혀진 상태 */
+  #profileIntro.collapsed,
+  #awardsList.collapsed {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  /* 확장된 상태 */
+  #profileIntro.expanded,
+  #awardsList.expanded {
+    display: block;
+    max-height: 1000px;
+    /* 충분히 큰 값으로 설정하여 최대 높이 제한을 없애줍니다. */
+    transition: max-height 0.3s ease-in-out;
+  }
+
+
+  #profileUsername {
+    font-family: Noto Sans KR;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+
+
+  #profileAwards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 17rem;
+    gap: 0.5rem;
+  }
+
+
+  #profileAwards h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  #profileAwards ul {
+
+    gap: 0.5rem;
+  }
+
+  #profileAwards ul li {
+    display: flex;
+    align-items: center;
+    font-family: Noto Sans KR;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+
+  /*worksInfo*/
+
+  #worksInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /*aside*/
+  #worksTitle {
+    display: none;
+  }
+
+
+
+  .work_title {
+    font-size: 0.75rem;
+  }
+
+
+
+  .aside {
+    top: 0rem;
+    left: 0rem;
+    width: 100%;
+
+    gap: 0.5rem;
+    height: fit-content;
+    overflow-x: hidden;
+    background: var(--section-box-bg);
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--border-point);
+  }
+
+
+  .aside #title {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .worksTitleSlider {
+    display: flex;
+    justify-content: center;
+    width: 20rem;
+    height: 4rem;
+  }
+
+  #worksTitleMobile {
+    display: block;
+    width: 100%;
+    height: 3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: Noto Sans KR;
+    color: var(--header-text-on);
+    background: var(--page-bg);
+    border-style: none;
+  }
+
+
+  #worksTitleMobile:hover {
+    border-style: none;
+  }
+
+  #worksTitleMobile:focus {
+    border-style: none;
+  }
+
+
+  #worksTitleMobile li {
+    cursor: pointer;
+    color: var(--header-text-off);
+    font-family: Noto Sans KR;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  #worksTitleMobile li.active {
+    color: var(--header-text-on);
+  }
+
+  /*worksbody*/
+
+  .worksBody {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .worksImg img {
+    width: 100%;
+  }
+
+  .useTools {
+    padding-left: 1.25rem;
+  }
+
+  #useTools {
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  #useTools img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  #useTools img:nth-child(6),
+  #useTools img:nth-child(7) {
+    display: none;
+  }
+
+  #work_body {
+    padding: 0 1.25rem 0.75rem 1.25rem;
+  }
+
+  .links {
+    justify-content: space-evenly;
+    gap: 0.75rem;
+  }
+
+  .links a {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .links div {
+    height: 53vw;
+  }
+
+  .links h3 {
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  /*Comment 댓글*/
+
+  #commentSection {
+    width: 20rem;
+  }
+
+  #guestBookSection {
+    width: 20rem;
+  }
+
+  #commentSection h1 {
+    font-size: 1.5rem;
+  }
+
+  #guestBookSection h1 {
+    font-size: 1.5rem;
+  }
+
+  #guestBookSection h2 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  #commentsList {
+    width: 20rem;
+  }
+
+  #commentForm {
+    gap: 0.75rem;
+  }
+
+  textarea#comment {
+    width: 18.375rem;
+    height: 5rem;
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+
+  input[type="text"]#nickname {
+    width: 60%;
+    font-size: 0.875rem;
+  }
+
+  input[type="password"]#password {
+    width: 20%;
+    font-size: 0.875rem;
+  }
+
+  .text_area {
+    gap: 0.75rem;
+  }
+
+  button#commentBtn {
+    width: 6rem;
+    font-size: 0.85rem
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  .comment-container {
+    margin-top: 2rem;
+  }
+
+  #commentsList ul {
+    margin-bottom: 0rem;
+  }
+
+  #commentsList ul li {
+    font-size: 1rem;
+    padding-left: 0.5rem;
+  }
+
+  samp {
+    font-size: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  #commentsList button {
+    font-size: 0.75rem;
+  }
+
+  .comment-container li:last-child {
+    font-size: 1rem;
+    padding: 0.75rem;
+    font-weight: 400;
+
+  }
+
+  /*creadit*/
+
+  #creadit .contentsWrap {
+    flex-direction: column;
+  }
+
+  .stillCut {
+    width: 20rem;
+  }
+
+  #creadit .contentsWrap .creadit-username {
+    display: flex;
+    width: 20rem;
+    padding-bottom: 0px;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 2.25rem;
+    flex-wrap: wrap;
+  }
+
+  .undergraduate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  #creadit div h3 {
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+
+  .creadit-username li {
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  /*still cut*/
+  .stillCutImgs {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 20rem;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .stillCutImgs li {
+    padding: 0.75rem;
+  }
+
+  .stillCutImgs li:nth-child(1) img,
+  .stillCutImgs li:nth-child(2) img,
+  .stillCutImgs li:nth-child(5) img,
+  .stillCutImgs li:nth-child(6) img,
+  .stillCutImgs li:nth-child(8) img,
+  .stillCutImgs li:nth-child(9) img,
+  .stillCutImgs li:nth-child(12) img,
+  .stillCutImgs li:nth-child(13) img {
+    width: 8.125rem;
+    height: 10.3125rem;
+  }
+
+  .stillCutImgs li:nth-child(3) img,
+  .stillCutImgs li:nth-child(4) img,
+  .stillCutImgs li:nth-child(10) img,
+  .stillCutImgs li:nth-child(11) img {
+    width: 18.375rem;
+    height: 10.3125rem;
+  }
+
+  .stillCutImgs li:nth-child(7) img {
+    width: 18.375rem;
+    height: 15rem;
+  }
+
+
+
+
+
+
+
+
+  /*footer*/
+  footer {
+    margin-top: 3.75rem;
+    width: 100%;
+    background: var(--section-box-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contents-container {
+    display: flex;
+    width: 20rem;
+    padding: 3.75rem 0rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.75rem;
+  }
+
+  .contents-container .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .contents .first-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .first-content .footer-tit {
+    color: var(--footer-off-text);
+    font-family: Darker Grotesque;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .first-content .footer-project-tit {
+    color: var(--footer-regular-text);
+    font-family: Darker Grotesque;
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .contents .second-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .second-content .anchors {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .second-content .anchors a {
+    color: var(--footer-regular-text);
+    font-family: Noto Sans KR;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .second-content .site-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 0.75rem;
+
+    border-top: 1px solid #3DD6B1;
+  }
+
+  .site-info p {
+    color: var(--footer-regular-text);
+    font-family: Noto Sans KR;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .site-info .offline-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .offline-info div {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .offline-info h2 {
+    color: var(--footer-regular-text);
+    font-family: Noto Sans KR;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .offline-info .off-option {
+    color: var(--footer-option-text);
+    font-family: Noto Sans KR;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .offline-info .off-text {
+    flex: 1 0 0;
+    color: var(--footer-regular-text);
+    font-family: Noto Sans KR;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .second-content .sub-info {
+    color: var(--footer-off-text);
+    font-family: Noto Sans KR;
+    font-size: 0.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .contents .third-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .third-content .creat-title {
+    color: var(--footer-option-text);
+    font-family: Noto Sans KR;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .third-content div {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .third-content div .creat-option {
+    color: var(--footer-option-text);
+    font-family: Noto Sans KR;
+    font-size: 0.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  .third-content div .creat-text {
+    color: var(--footer-regular-text);
+    font-family: Noto Sans KR;
+    font-size: 0.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+
+}

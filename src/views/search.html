@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>웹 프로젝트 졸업전시</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="font-family.css" />
+  <script src="./js/header.js"></script>
+  <script src="./js/pagesize.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header_container">
+      <div class="button">
+        <a href="/" class="header_btn">홈</a>
+        <a href="./comment/comment.html" class="header_btn">방명록</a>
+        <a href="#" class="header_btn active">프로필</a>
+        <div class="search">
+          <form id="searchProfile" class="searchBox">
+            <input type="text" autocomplete="off" name="username" autocomplete="off" id="searchInput"
+              placeholder="프로필 검색" />
+            <button id="searchButton">
+              <img src="./icons/search-stroke.svg" alt="search-stroke" />
+            </button>
+          </form>
+          <div id="searchResults" class="autocompleteResults"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <section id="personalProfile">
+      <h1 class="sectionTitle">Profile</h1>
+      <div class="contentsWrap"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contents-container">
+      <div class="contents">
+        <div class="first-content">
+          <p class="footer-tit">CheckMate</p>
+          <p class="footer-project-tit">web design</p>
+        </div>
+        <div class="second-content">
+          <div class="anchors">
+            <a href="/">홈</a>
+            <a href="./comment/comment.html">방명록</a>
+            <a href="./search.html">프로필</a>
+          </div>
+          <div class="site-info">
+            <p>2023 백석대학교 디자인영상학부 시각디자인전공 웹 미디어 디자인 프로젝트반 온라인 졸업전시회</p>
+            <div class="offline-info">
+              <h2>오프라인 전시</h2>
+              <div>
+                <span class="off-option">장소</span>
+                <span class="off-text">충청남도 천안시 동남구 문암로 76 백석대학교, 조형관 갤러리 1관</span>
+              </div>
+              <div>
+                <span class="off-option">기간</span>
+                <span class="off-text">2023.10.30(월) ~ 2023.11.04(토) 09:00 ~ 18:00</span>
+              </div>
+            </div>
+          </div>
+          <p class="sub-info">@2023 Baekseok University Department of Design and Imaging, Visual Design Major Web Media
+            Design Project Class Graduation Online Exhibition Site</p>
+        </div>
+        <div class="third-content">
+          <h3 class="creat-title">@Creat By</h3>
+          <div>
+            <span class="creat-option">기획/디자인/개발</span>
+            <span class="creat-text">이광원</span>
+          </div>
+          <div>
+            <span class="creat-option">영상제작</span>
+            <span class="creat-text">방민수</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/index.js"></script>
+  <script src="./js/search.js"></script>
+  <script src="./js/undergraduate.js"></script>
+
+</body>
+
+</html>
